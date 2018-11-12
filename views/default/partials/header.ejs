@@ -1,0 +1,51 @@
+<!-- header -->
+<header>
+  <!-- header menu -->
+  <div class="navbar-fixed">
+    <nav class="nav-wrapper black">
+      <div class="container">
+        <!-- burger menu -->
+        <a href="#" data-target="mobile-menu" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        <!-- left menu -->
+        <ul class="left hide-on-med-and-down">
+          <li><a href="/">Home</a></li>
+          <% if(typeof pageList != 'undefined') { pageList.forEach((page) => { %>
+          <li><a href="/page/<%= page.slug %>"><%= page.title %></a></li>
+          <% }); } %>
+        </ul>
+        <!-- logo -->
+        <a href="/" class="brand-logo center">&lt;<%= SITE.title.split(' ').join('').toLowerCase(); %> /&gt;</a>
+        <!-- right menu -->
+        <ul class="right hide-on-med-and-down">
+          <li><a target="_blank" href="<%= THEME.github %>"><i class="fab fa-github"></i></a></li>
+          <li><a target="_blank" href="<%= THEME.linkedin %>"><i class="fab fa-linkedin"></i></a></li>
+          <li><a target="_blank" href="<%= THEME.twitter %>"><i class="fab fa-twitter"></i></a></li>
+          <li><a target="_blank" href="<%= THEME.facebook %>"><i class="fab fa-facebook"></i></a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+
+  <!-- mobile menu -->
+  <ul id="mobile-menu" class="sidenav">
+    <li>
+      <div class="user-view">
+        <div class="background">
+          <img src="/images/office.jpg" />
+        </div>
+        <a href="#user"><img class="circle" src="/images/me.jpeg" /></a>
+        <a href="#name"><span class="white-text name"><%= THEME.realname %></span></a>
+        <a href="#email"><span class="white-text email"><%= THEME.email %></span></a>
+      </div>
+    </li>
+    <li><a href="/">Home</a></li>
+    <li class="divider"></li>
+    <li><a href="<%= THEME.github %>">Github</a></li>
+    <li><a href="<%= THEME.linkedin %>">Linkedin</a></li>
+    <li><a href="<%= THEME.twitter %>">Twitter</a></li>
+    <li><a href="<%= THEME.facebook %>">Facebook</a></li>
+  </ul>
+
+  <%- include('partials/header/' + template) %>
+
+</header>

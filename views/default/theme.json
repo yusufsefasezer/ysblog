@@ -1,0 +1,12 @@
+{
+  "name": "default",
+  "description": "Default YSBLOG theme",
+  "engine": "ejs",
+  "aboutText": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus asperiores consequatur quisquam fuga impedit. Ducimus non dolores dolore aliquam consectetur veniam quis doloremque, fugit sint, eos, nam earum rem asperiores.",
+  "github": "http://www.github.com/yusufsefasezer",
+  "linkedin": "http://www.linkedin.com/in/yusufsefasezer",
+  "twitter": "http://www.twitter.com/yusufsefasezer",
+  "facebook": "http://www.facebook.com/yusufsefasezer",
+  "realname": "Yusuf SEZER",
+  "email": "yusufsezer@mail.com"
+}

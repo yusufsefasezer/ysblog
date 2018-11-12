@@ -1,0 +1,85 @@
+<% include partials/head %>
+
+<body class="hold-transition skin-green-light sidebar-mini">
+  <div class="wrapper">
+
+    <% include partials/header %>
+
+    <% include partials/sidebar %>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+      <section class="content-header">
+        <h1><%= page.title %>
+          <small><a href="/admin/posts/new" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i> Add New </a></small>
+        </h1>
+        <ol class="breadcrumb">
+          <li><a href="/admin"><i class="fa fa-dashboard"></i> Home</a></li>
+          <li class="active"><%= page.title %></li>
+        </ol>
+      </section>
+
+      <!-- Main content -->
+      <section class="content">
+        <div class="row">
+          <div class="col-xs-12">
+            <% if (typeof message != 'undefined') { %>
+              <div class="alert alert-info"><%= message %></div>
+            <% } %>
+            <div class="box">
+              <!-- /.box-header -->
+              <div class="box-body">
+                <table id="post_list" class="table table-bordered table-striped">
+                  <thead>
+                    <tr>
+                      <th>Title</th>
+                      <th>Category</th>
+                      <th>Status</th>
+                      <th>Date</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead><% if(posts.length > 0 ) { %>
+                    <tbody><% for(let index = 0; index < posts.length; index++) { const currentPost = posts[index]; %>
+                        <tr>
+                          <td><%= currentPost.title %></td>
+                          <td><% let categories = currentPost.category;
+                              for (let cindex = 0; cindex < categories.length; cindex++) { %><%= categories[cindex].name %><% } %></td>
+                          <td><%= currentPost.status %></td>
+                          <td><%= currentPost.createdAt.toLocaleDateString(); %></td>
+                          <td>
+                            <a href="/admin/posts/edit/<%= currentPost._id %>" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></a>
+                            <a href="/admin/posts/delete/<%= currentPost._id %>" class="btn btn-danger btn-xs"><i class="fa fa-times"></i></a>
+                          </td>
+                        </tr><% } %>
+                    </tbody><% } %>
+                  <tfoot>
+                    <tr>
+                      <th>Title</th>
+                      <th>Category</th>
+                      <th>Status</th>
+                      <th>Date</th>
+                      <th>Actions</th>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+              <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </section>
+      <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+    <% include partials/footer %>
+
+  </div>
+  <!-- ./wrapper -->
+
+</body>
+
+</html>

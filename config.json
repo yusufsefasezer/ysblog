@@ -1,0 +1,15 @@
+{
+  "DB_URI": "mongodb://127.0.0.1:27017/ysblog",
+  "SITE": {
+    "title": "Yusuf SEZER",
+    "url": "http://localhost:3000",
+    "theme": "default",
+    "postsPerPage": 10,
+    "apiStatus": false,
+    "registerStatus": false
+  },
+  "SESSION": {
+    "name": "ysblog",
+    "secret": "ysblog"
+  }
+}

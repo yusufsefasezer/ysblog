@@ -1,0 +1,120 @@
+<% include partials/head %>
+
+<body class="hold-transition skin-green-light sidebar-mini">
+  <div class="wrapper">
+
+      <% include partials/header %>
+
+      <% include partials/sidebar %>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+      <section class="content-header">
+          <h1><%= page.title %></h1>
+          <ol class="breadcrumb">
+            <li><a href="/admin"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active"><%= page.title %></li>
+          </ol>
+        </section>
+
+      <!-- Main content -->
+      <section class="content">
+          <div class="row">
+
+            <div class="col-md-4">
+              <% if (typeof message != 'undefined') { %>
+                <div class="alert alert-info"><%= message %></div>
+              <% } %>
+              <!-- general form elements -->
+              <div class="box box-primary">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Add New Category</h3>
+                </div>
+                <!-- /.box-header -->
+                <!-- form start -->
+                <form method="POST">
+                  <div class="box-body">
+
+                    <div class="form-group">
+                      <label for="category">Name</label>
+                      <input type="text" name="category" id="category" class="form-control" placeholder="Enter Category Name" required="required" value="<%= typeof category != 'undefined' ? category.name : '' %>"  />
+                    </div>
+
+                    <div class="form-group">
+                      <label for="slug">Slug</label>
+                      <input type="text" name="slug" id="slug" class="form-control" placeholder="Slug" required="required" value="<%= typeof category != 'undefined' ? category.slug : '' %>"  />
+                    </div>
+
+                    <div class="form-group">
+                      <label for="parent">Parent Category</label>
+                      <select class="form-control" id="parent" name="parent">
+                        <option value="0">None</option><% if(categories.length > 0 ) { %>
+                          <% for(let index = 0; index < categories.length; index++) { %>
+                            <option value="<%= categories[index]._id %>"<%- ((typeof category != 'undefined') && (category._id.toString() == categories[index]._id.toString())) ? ' selected="selected"' : ''  %>><%= categories[index].name %></option>
+                          <% }} %>
+                      </select>
+                    </div>
+
+                  </div>
+                  <!-- /.box-body -->
+  
+                  <div class="box-footer">
+                    <button type="submit" class="btn btn-primary"><%= typeof category != 'undefined' ? 'Update Category' : 'Add New Category' %></button>
+                  </div>
+                </form>
+              </div>
+              <!-- /.box -->
+  
+            </div>
+  
+            <div class="col-md-8">
+              <div class="box">
+                <!-- /.box-header -->
+                <div class="box-body">
+                  <table id="category_list" class="table table-bordered table-striped">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>Slug</th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead><% if(categories.length > 0 ) { %>
+                      <tbody><% for(let index = 0; index < categories.length; index++) { %>
+                          <tr>
+                            <td><%= categories[index].name %></td>
+                            <td><%= categories[index].slug %></td>
+                            <td>
+                              <a href="/admin/categories/edit/<%= categories[index]._id %>" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></a>
+                              <a href="/admin/categories/delete/<%= categories[index]._id %>" class="btn btn-danger btn-xs"><i class="fa fa-times"></i></a>
+                            </td>
+                          </tr><% } %>
+                      </tbody><% } %>
+                    <tfoot>
+                      <tr>
+                        <th>Name</th>
+                        <th>Slug</th>
+                        <th>Post Count</th>
+                      </tr>
+                    </tfoot>
+                  </table>
+                </div>
+                <!-- /.box-body -->
+              </div>
+              <!-- /.box -->
+            </div>
+            <!-- /.col -->
+          </div>
+          <!-- /.row -->
+        </section>
+      <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+    <% include partials/footer %>
+
+  </div>
+  <!-- ./wrapper -->
+
+</body>
+
+</html>

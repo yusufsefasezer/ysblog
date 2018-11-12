@@ -1,0 +1,11 @@
+<% include partials/head %>
+
+<% include partials/header %>
+
+<main class="container center">
+  <h1><%= data.message %></h1>
+  <h2><%= data.error.status %></h2>
+  <pre><%= data.error.stack %></pre>
+</main>
+
+<% include partials/footer %>

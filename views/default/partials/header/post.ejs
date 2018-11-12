@@ -1,0 +1,15 @@
+<!-- post meta -->
+<div class="grey lighten-4 valign-wrapper center">
+  <div class="container">
+    <h1><%= data.post.title %></h1>
+    <p class="truncate"><%= data.post.content.replace(/(<([^>]+)>)/ig,'').split('.')[0] %>.</p>
+    <%= data.post.createdAt.toLocaleDateString() %> / <% let categories = data.post.category; for (let cindex = 0; cindex < categories.length; cindex++) { %>
+      <a href="/category/<%= categories[cindex].slug %>"><%= categories[cindex].name %></a>
+    <% } %>
+
+    <div class="section">
+      <a href="#article" class="btn-floating btn-med black"><i class="material-icons" style="pointer-events: none;">keyboard_arrow_down</i></a>
+    </div>
+  </div>
+
+</div>

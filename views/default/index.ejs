@@ -1,0 +1,45 @@
+<% include partials/head %>
+
+<% include partials/header %>
+
+<main class="container">
+<% if(typeof data.category != 'undefined'){  %>
+<h3 class="center"><%= data.category %></h3>
+<% } %>
+<!-- posts -->
+<div class="row">
+  <% if (typeof data.posts != 'undefined') { %>
+   
+  <% for(let index = 0; index < data.posts.length; index++) {
+    const currentPost = data.posts[index]; %>
+  <!-- post -->
+  <div class="col s12">
+    <div class="card hoverable">
+      <div class="card-content">
+        <a href="/post/<%= currentPost.slug %>" class="card-title"><%= currentPost.title %></a>
+        <p class="truncate"><%- removeHTML(firstParagraph(currentPost.content)) %>.</p>
+      </div>
+      <div class="card-action">
+        <a href="/post/<%= currentPost.slug %>" class="waves-effect waves-light btn btn-small black">Read more</a>
+        <% let categories = currentPost.category;
+          for (let cindex = 0; cindex < categories.length; cindex++) { %>
+            <a href="/category/<%= categories[cindex].slug %>" class="right grey-text"><%= categories[cindex].name %></a>
+          <% } %>
+      </div>
+    </div>
+  </div>
+  <% } } %>
+
+</div>
+
+<% if (data.pagination.total != 0) {   %>
+  <!-- pagination -->
+  <ul class="pagination center black-text">
+    <% for(let index = 1; index <= data.pagination.total; index++) { %>
+    <li class="<%= (data.pagination.current + 1 == index) ? "active" : "waves-effect" %>"><a href="?page=<%= index %>"><%= index %></a></li>  
+    <% } %>
+  </ul>
+<% } %>
+</main>
+
+<% include partials/footer %>

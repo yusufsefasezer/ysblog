@@ -1,0 +1,93 @@
+<% include partials/head %>
+
+<body class="hold-transition skin-green-light sidebar-mini">
+  <div class="wrapper">
+
+    <% include partials/header %>
+
+    <% include partials/sidebar %>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+      <section class="content-header">
+        <h1><%= page.title %></h1>
+        <ol class="breadcrumb">
+          <li><a href="/admin"><i class="fa fa-dashboard"></i> Home</a>
+          </li><li class="active"><%=page.title%></li>
+        </ol>
+      </section>
+
+      <!-- Main content -->
+      <section class="content">
+        <div class="row">
+          <form method="POST">
+
+            <!-- Editor -->
+            <div class="col-md-9">
+              <% if (typeof message != 'undefined' && message != '' ) { %>
+                <div class="alert alert-info"><%= message %></div>
+              <% } %>
+              <div class="box box-success">
+                <!-- /.box-header -->
+                <div class="box-body">
+
+                  <div class="form-group">
+                    <input type="text" name="post_title" class="form-control input-lg" placeholder="Enter title here" required="required" value="<%= typeof post != 'undefined' ? post.title : '' %>">
+                  </div>
+
+                  <div class="form-group">
+                    <textarea class="textarea" placeholder="Place some text here" style="width: 100%; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"
+                      required="required" name="post_content"><%= typeof post != 'undefined' ? post.content : '' %></textarea>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <!-- Post options -->
+            <div class="col-md-3">
+              <div class="box pad">
+                
+                <!-- Status -->
+                <div class="form-group">
+                  <label>Status</label>
+                  <select class="form-control" name="post_status" required="required"><% let status =  typeof post != 'undefined' ? post.status : ''; %>
+                    <option<%- (status == 'Published') ? ' selected="selected"' : '' %>>Published</option>
+                    <option<%- (status == 'Draft') ? ' selected="selected"' : '' %>>Draft</option>
+                  </select>
+                </div>
+
+                <!-- Category -->
+                <div class="form-group">
+                  <label>Category</label>
+                  <select class="form-control select2" name="post_category" multiple="multiple" data-placeholder="Select a Category" style="width: 100%"
+                    required="required"><% if(typeof category != 'undefined') { %>
+                      <% for(let index = 0; index < category.length; index++) {
+                        id = category[index]._id;
+                        result = (typeof post != 'undefined') ? post.category.toString().includes(id) : ''; %>
+                        <option value="<%= id %>"<%- result ? ' selected="selected"' : '' %>><%= category[index].name %></option><% }} %>
+                  </select>
+                </div>
+
+                <input type="submit" value="Save" class="btn btn-success btn-block" />
+                <!-- /.form group -->
+
+              </div>
+            </div>
+            <!-- /.col-->
+          </form>
+        </div>
+        <!-- ./row -->
+      </section>
+      <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+    <% include partials/footer %>
+
+  </div>
+  <!-- ./wrapper -->
+
+</body>
+
+</html>

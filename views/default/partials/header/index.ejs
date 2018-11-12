@@ -1,0 +1,4 @@
+<!-- category -->
+<ul class="tabs tabs-fixed-width z-depth-1"><% categoryList.forEach((category) => { %>
+  <li class="tab"><a href="/category/<%= category.slug %>" class="black-text"><%= category.name %></a></li><% }); %>
+</ul>

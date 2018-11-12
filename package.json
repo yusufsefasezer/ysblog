@@ -1,0 +1,27 @@
+{
+  "name": "ysblog",
+  "version": "0.0.1",
+  "description": "",
+  "scripts": {
+    "start": "node ./bin/www",
+    "test": "mocha ./tests"
+  },
+  "keywords": [],
+  "author": "Yusuf SEZER <yusufsezer@mail.com> (http://www.yusufsezer.com/)",
+  "license": "MIT",
+  "dependencies": {
+    "compression": "^1.7.3",
+    "connect-flash": "^0.1.1",
+    "connect-mongo": "^2.0.1",
+    "cookie-parser": "^1.4.3",
+    "debug": "^4.1.0",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "express-session": "^1.15.6",
+    "http-errors": "^1.7.1",
+    "mongoose": "^5.3.5",
+    "morgan": "^1.9.1",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0"
+  }
+}

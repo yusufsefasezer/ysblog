@@ -1,0 +1,38 @@
+<!-- footer -->
+<footer class="page-footer black">
+  <div class="container">
+    <div class="row">
+      <div class="col l4 s12">
+        <h5>About</h5>
+        <p><%= THEME.aboutText  %></p>
+      </div>
+      <!-- latest posts -->
+      <div class="col l3 s12 offset-l1">
+        <h5>Latest Posts</h5>
+        <ul><% latestPosts.forEach((post) => { %>
+          <li><a href="/post/<%= post.slug %>"><%= post.title %></a></li>  
+          <% }); %>
+        </ul>
+      </div>
+      <!-- categories -->
+      <div class="col l3 s12 offset-l1">
+        <h5>Category</h5>
+        <ul><% categoryList.forEach((category) => { %>
+          <li><a href="/category/<%= category.slug %>"><%= category.name %></a></li>  
+          <% }); %>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- copyright -->
+  <div class="footer-copyright">
+    <div class="container"> &copy; 2018 ysBlog <a class="right" href="http://www.yusufsezer.com"><em>www.yusufsezer.com</em></a>
+    </div>
+  </div>
+
+</footer>
+
+</body>
+
+</html>

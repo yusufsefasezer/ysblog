@@ -1,0 +1,144 @@
+<% include partials/head %>
+
+<body class="hold-transition skin-green-light sidebar-mini">
+  <div class="wrapper">
+
+    <% include partials/header %>
+
+    <% include partials/sidebar %>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+      <section class="content-header">
+        <h1><%= page.title %><small>Control panel</small></h1>
+        <ol class="breadcrumb">
+          <li><a href="/admin"><i class="fa fa-dashboard"></i> Home</a></li>
+          <li class="active"><%= page.title %></li>
+        </ol>
+      </section>
+
+      <!-- Main content -->
+      <section class="content">
+        <!-- Small boxes (Stat box) -->
+        <div class="row">
+          <div class="col-xs-4">
+            <!-- small box -->
+            <div class="small-box bg-light-blue">
+              <div class="inner">
+                <h3><%= count.post %></h3>
+                <p>Posts</p>
+              </div>
+              <div class="icon"><i class="fa fa-files-o"></i></div>
+              <a href="/admin/posts" class="small-box-footer">Posts <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-xs-4">
+            <!-- small box -->
+            <div class="small-box bg-olive">
+              <div class="inner">
+                <h3><%= count.page %></h3>
+                <p>Pages</p>
+              </div>
+              <div class="icon"><i class="fa fa-file-o"></i></div>
+              <a href="/admin/pages" class="small-box-footer">Pages <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-xs-4">
+            <!-- small box -->
+            <div class="small-box bg-red">
+              <div class="inner">
+                <h3><%= count.category %></h3>
+                <p>Category</p>
+              </div>
+              <div class="icon"><i class="fa fa-list-ul"></i></div>
+              <a href="/admin/categories" class="small-box-footer">Category <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- ./col -->
+        </div>
+        <!-- /.row -->
+
+        <!-- Main row -->
+        <div class="row">
+          <!-- Left col -->
+          <section class="col-lg-7">
+            <!-- quick post widget -->
+            <div class="box box-primary">
+
+              <div class="box-header">
+                <i class="fa fa-envelope"></i>
+                <h3 class="box-title">Quick Post</h3>
+              </div>
+
+              <div class="box-body">
+                <form method="POST">
+                  <div class="form-group">
+                    <input disabled="disabled" type="text" name="post_title" class="form-control input-lg" placeholder="Enter title here" required="required" />
+                  </div>
+                  <div class="form-group">
+                    <textarea disabled="disabled" name="post_content" class="textarea" placeholder="Place some text here" style="width: 100%; height: 125px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;" required="required"></textarea>
+                  </div>
+                </form>
+              </div>
+
+              <div class="box-footer">
+                <button type="button" class="pull-right btn btn-default" disabled="disabled">Send <i class="fa fa-arrow-circle-right"></i></button>
+              </div>
+            </div>
+
+          </section>
+          <!-- /.Left col -->
+          <!-- right col -->
+          <section class="col-lg-5">
+            <!-- Latest Posts -->
+            <div class="box box-info">
+
+              <div class="box-header">
+                <i class="fa fa-envelope"></i>
+                <h3 class="box-title">Latest Posts</h3>
+              </div>
+
+              <div class="box-body">
+                <table class="table no-margin">
+                  <thead>
+                    <tr>
+                      <th>Title</th>
+                      <th>Date</th>
+                    </tr>
+                  </thead><% if(posts.length > 0 ) { %>
+                    <tbody><% for(let index = 0; index < posts.length; index++) { %>
+                        <tr>
+                          <td><%= posts[index].title %></td>
+                          <td><%= new Date(posts[index].createdAt).toLocaleDateString(); %></td>
+                        </tr><% } %>
+                    </tbody><% } %>
+                </table>
+              </div>
+
+              <div class="box-footer text-center">
+                <a href="/admin/posts" class="uppercase">View All Posts</a>
+              </div>
+            </div>
+
+            <!-- /.box -->
+
+          </section>
+          <!-- right col -->
+        </div>
+        <!-- /.row (main row) -->
+
+      </section>
+      <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+    <% include partials/footer %>
+
+  </div>
+  <!-- ./wrapper -->
+
+</body>
+
+</html>

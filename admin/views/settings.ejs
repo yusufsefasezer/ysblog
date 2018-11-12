@@ -1,0 +1,121 @@
+<% include partials/head %>
+
+<body class="hold-transition skin-green-light sidebar-mini">
+  <div class="wrapper">
+
+    <% include partials/header %>
+
+    <% include partials/sidebar %>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+      <section class="content-header">
+        <h1><%= page.title %></h1>
+        <ol class="breadcrumb">
+          <li><a href="/admin"><i class="fa fa-dashboard"></i> Home</a></li>
+          <li class="active"><%= page.title %></li>
+        </ol>
+      </section>
+
+      <!-- Main content -->
+      <section class="content">
+        <form method="POST">
+        <div class="row">
+
+          <div class="col-md-6">
+            <% if (typeof message != 'undefined') { %>
+              <div class="alert alert-info"><%= message %></div>
+            <% } %>
+            <!-- general form elements -->
+            <div class="box box-primary">
+              <div class="box-header with-border">
+                <h3 class="box-title">Site Settings</h3>
+              </div>
+              <!-- /.box-header -->
+              <!-- form start -->
+              
+                <div class="box-body">
+
+                  <div class="form-group">
+                    <label for="site_title">Site Title</label>
+                    <input type="text" id="site_title" name="site_title" class="form-control" required="required" value="<%= config.title %>" />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="site_url">Site URL</label>
+                    <input type="url" id="site_url" name="site_url" class="form-control" required="required" value="<%= config.url %>" />
+                  </div>
+
+                  <div class="form-group">
+                    <label for="site_theme">Theme</label>
+                    <select class="form-control" id="theme_name" name="theme_name"><% for(let index = 0; index < themes.length; index++) { %>
+                        <option value="<%= themes[index] %>" <%- themes[index] == config.theme ? 'selected="selected"' : '' %>><%=themes[index] %></option><% } %>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="posts_per_page">Posts per page</label>
+                    <input type="number" class="form-control" id="posts_per_page" name="posts_per_page" required="required" min="1" step="1" value="<%= config.postsPerPage %>" />
+                  </div>
+                </div>
+                <!-- /.box-body -->
+
+            </div>
+            <!-- /.box -->
+
+          </div>
+
+          <div class="col-md-6">
+            <!-- general form elements -->
+            <div class="box box-primary">
+              <div class="box-header with-border">
+                <h3 class="box-title">Other Settings</h3>
+              </div>
+              <!-- /.box-header -->
+              <!-- form start -->
+                <div class="box-body">
+
+                  <div class="form-group">
+                    <label for="disqus_key">Disqus KEY</label>
+                    <input type="text" id="disqus_key" name="disqus_key" class="form-control" value="<%= config.disqusKey %>" disabled="disabled" />
+                  </div>
+
+                  <div class="form-group row">
+                    <label class="col-sm-2 control-label" for="register_status">Register</label>
+                    <div class="col-sm-10">
+                      <input type="checkbox" id="register_status" name="register_status" <%- config.registerStatus ? 'checked="checked"' : '' %> disabled="disabled" />
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <label class="col-sm-2 control-label" for="api_status">API Status</label>
+                    <div class="col-sm-10">
+                      <input type="checkbox" id="api_status" name="api_status" <%- config.apiStatus ? 'checked="checked"' : '' %> disabled="disabled" />
+                    </div>
+                  </div>
+
+                  <button type="submit" class="btn btn-primary btn-block">Save Settings</button>
+                </div>
+                <!-- /.box-body -->
+
+            </div>
+            <!-- /.box -->
+          </div>
+       
+          <!-- /.col -->
+        </div>
+      </form>
+        <!-- /.row -->
+      </section>
+      <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+    <% include partials/footer %>
+
+  </div>
+  <!-- ./wrapper -->
+
+</body>
+
+</html>
