@@ -26,8 +26,8 @@ ysBlog has several configuration like title, url, theme etc. If you want to chan
 - [x] Default Theme
 - [] Disqus Comment System
 - [] API
-  - [] REST API
-  - [] GraphQL
+- [] REST API
+- [] GraphQL
 - [] Plugins / Middlewares
 - [] Test
 - [] Migration (Wordpress, Blogger, Tumblr  etc.)
