@@ -49,29 +49,34 @@ passport.use('register', new LocalStrategy({
 
   // find a user whose email is the same as the forms email
   // we are checking to see if the user trying to login already exists
-  await User.findOne({ 'email': email }, (err, user) => {
+  let foundUser = null;
+  try {
+    foundUser = await User.findOne({ email: email });
+  } catch (error) {
     // if there are any errors, return the error
-    if (err) return done(err);
+    return done(error);
+  }
 
-    // check to see if there's already a user with that email
-    if (user)
-      return done(null, false, req.flash('registerMessage', 'That email is already taken.'));
+  // check to see if there's already a user with that email
+  if (foundUser)
+    return done(null, false, req.flash('registerMessage', 'That email is already taken.'));
 
-    // if there's no user with that email, create the user
-    var newUser = new User();
+  // if there's no user with that email, create the user
+  var newUser = new User();
 
-    // set the user's credentials
-    newUser.email = email;
-    newUser.password = User.md5(password);
-    newUser.fname = req.body.fname;
+  // set the user's credentials
+  newUser.email = email;
+  newUser.password = User.md5(password);
+  newUser.fname = req.body.fname;
 
-    // save the user
-    newUser.save((err) => {
-      if (err) throw err;
-      return done(null, newUser);
-    });
-
-  });
+  // save the user
+  try {
+    await newUser.save();
+  } catch (error) {
+    // if there are any errors, return the error
+    return done(error);
+  }
+  return done(null, newUser);
 }));
 
 module.exports = Router;

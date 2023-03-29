@@ -45,22 +45,24 @@ passport.use('login', new LocalStrategy({
 
   // find a user whose email is the same as the forms email
   // we are checking to see if the user trying to login already exists
-  await User.findOne({ 'email': email }, (err, user) => {
-    // if there are any errors, return the error before anything else
-    if (err) return done(err);
+  let foundUser = null;
+  try {
+    foundUser = await User.findOne({ email: email });
+  } catch (error) {
+    // if there are any errors, return the error
+    return done(error);
+  }
 
-    // if no user is found, return the message
-    if (!user)
-      return done(null, false, req.flash('loginMessage', 'No user found.'));
+  // if no user is found, return the message
+  if (!foundUser)
+    return done(null, false, req.flash('loginMessage', 'No user found.'));
 
-    // if the user is found but the password is wrong
-    if (!user.validPassword(password))
-      return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.'));
+  // if the user is found but the password is wrong
+  if (!foundUser.validPassword(password))
+    return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.'));
 
-    // all is well, return successful user
-    return done(null, user);
-  });
-
+  // all is well, return successful user
+  return done(null, foundUser);
 }));
 
 module.exports = Router;

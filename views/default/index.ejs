@@ -1,6 +1,6 @@
-<% include partials/head %>
+<%- include('partials/head') %>
 
-<% include partials/header %>
+<%- include('partials/header') %>
 
 <main class="container">
 <% if(typeof data.category != 'undefined'){  %>
@@ -42,4 +42,4 @@
 <% } %>
 </main>
 
-<% include partials/footer %>
+<%- include('partials/footer') %>

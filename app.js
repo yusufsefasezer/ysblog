@@ -6,7 +6,7 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const logger = require('morgan');
 const mongoose = require('mongoose');
-const mongoStore = require('connect-mongo')(session);
+const MongoStore = require('connect-mongo');
 const passport = require('passport');
 const flash = require('connect-flash');
 const User = require('./models/User');
@@ -18,14 +18,7 @@ config.THEME = themeData;
 app.set('config', config);
 
 // Connect to mongodb
-mongoose.connect(config.DB_URI, {
-  useNewUrlParser: true,
-  useCreateIndex: true,
-  useFindAndModify: false
-}, (err) => {
-  if (err) return console.error(err.message);
-  // console.log('Connection successful');
-});
+mongoose.connect(config.DB_URI);
 mongoose.Promise = global.Promise;
 
 // Express setup
@@ -39,7 +32,8 @@ app.use(compression())
 app.use(session({
   name: config.SESSION.name,
   secret: config.SESSION.secret,
-  store: new mongoStore({ mongooseConnection: mongoose.connection }),
+  //store: new mongoStore({ mongooseConnection: mongoose.connection }),
+  store: MongoStore.create({ mongoUrl: config.DB_URI }),
   resave: false,
   saveUninitialized: true
 }));
@@ -52,9 +46,13 @@ passport.serializeUser(function (user, done) {
 });
 
 passport.deserializeUser(function (id, done) {
-  User.findById(id, function (err, user) {
-    done(err, user);
-  });
+  User.findById(id)
+    .catch(err => {
+      done(err);
+    })
+    .then(user => {
+      done(null, user);
+    });
 });
 
 // view engine setup

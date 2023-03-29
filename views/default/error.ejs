@@ -1,6 +1,6 @@
-<% include partials/head %>
+<%- include('partials/head') %>
 
-<% include partials/header %>
+<%- include('partials/header') %>
 
 <main class="container center">
   <h1><%= data.message %></h1>
@@ -8,4 +8,4 @@
   <pre><%= data.error.stack %></pre>
 </main>
 
-<% include partials/footer %>
+<%- include('partials/footer') %>
